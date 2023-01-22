@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import Layout from '../components/Layout'
 import dynamic from 'next/dynamic'
 
-const SigninComponent = dynamic(
-  () => import("../components/auth/SigninComponent"),
-  { ssr: false }
+const SigninComponent = lazy(
+  () => import("../components/auth/SigninComponent")
 )
 
 const Signin = () => {

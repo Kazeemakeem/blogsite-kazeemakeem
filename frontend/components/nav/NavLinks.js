@@ -3,16 +3,16 @@ import { isAuth } from '../../actions/auth'
 import NavWithAuth from './NavWithAuth'
 import NavWithoutAuth from './NavWithoutAuth'
 
-const NavLinks = () => {
+const NavLinks = ({display}) => {
 
-  const [pageLinks, setPageLinks] = useState(null)
+  // const [PageLinks, setPageLinks] = useState(NavWithoutAuth)
 
-  useEffect(() => {
-    !isAuth() ? setPageLinks(NavWithoutAuth) : setPageLinks(NavWithAuth)
-  }, [])
+  // useEffect(() => {
+  //   !isAuth() ? setPageLinks(NavWithoutAuth) : setPageLinks(NavWithAuth)
+  // }, [])
 
   return (
-    <pageLinks />
+    isAuth() ? <NavWithAuth display={display}/> : <NavWithoutAuth display={display}/>
   )
 }
 

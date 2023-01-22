@@ -1,9 +1,13 @@
 import fetch from 'isomorphic-fetch'
 import cookie from 'js-cookie'
+import { API } from '../utills'
+
 
 export const signup = (user) => {
   
-  const API = process.env.PRODUCTION ? process.env.API_PRODUCTION : process.env.API_DEVELOPMENT
+  // const API = process.env.NEXT_PUBLIC_PRODUCTION ? process.env.NEXT_PUBLIC_API_DEVELOPMENT : process.env.NEXT_PUBLIC_API_PRODUCTION
+  
+  console.log(API)
   
   return fetch(`${API}/signup`, {
     method: 'POST',
@@ -21,7 +25,7 @@ export const signup = (user) => {
 
 export const signin = (user) => {
   
-  const API = process.env.PRODUCTION ? process.env.API_PRODUCTION : process.env.API_DEVELOPMENT
+  // const API = process.env.NEXT_PUBLIC_PRODUCTION ? process.env.NEXT_PUBLIC_API_DEVELOPMENT : process.env.NEXT_PUBLIC_API_PRODUCTION
   
   return fetch(`${API}/signin`, {
     method: 'POST',
@@ -39,7 +43,7 @@ export const signin = (user) => {
 
 export const signout = (next) => {
 
-  const API = process.env.PRODUCTION ? process.env.API_PRODUCTION : process.env.API_DEVELOPMENT
+  // const API = process.env.NEXT_PUBLIC_PRODUCTION ? process.env.NEXT_PUBLIC_API_DEVELOPMENT : process.env.NEXT_PUBLIC_API_PRODUCTION
 
   removeCookie('token')
   removeLocalStorage('user')
@@ -86,6 +90,12 @@ export const getCookie = (key) => {
 export const setLocalStorage = ( key, value ) => {
   if(process.browser){
     localStorage.setItem(key, JSON.stringify(value))
+  }
+}
+
+export const getLocalStorage = (key) => {
+  if(process.browser){
+    localStorage.getItem(key)
   }
 }
 

@@ -30,7 +30,7 @@ const SignupComponent = () => {
     e.preventDefault()
     // console.table({name, email, password, error, loading, message, showForm})
     setValues({...values, loading: true, error: false})
-    const user = {name, email, password}
+    const user = { name, email, password }
 
     signup(user)
     .then(data => {

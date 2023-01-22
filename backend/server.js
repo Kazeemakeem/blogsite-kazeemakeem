@@ -10,6 +10,8 @@ require('dotenv').config()
 const blogRoute = require('./routes/blog')
 const authRoute = require('./routes/auth')
 const userRoute = require('./routes/user')
+const categoryRoute = require('./routes/category')
+const tagRoute = require('./routes/tag')
 
 
 // app
@@ -17,7 +19,7 @@ const app = express()
 
 // db
 mongoose
-  .connect(process.env.DATABASE_LOCAL)
+  .connect(process.env.DATABASE_CLOUD)
   .then(() => console.log('DB Connected'))
   .catch(err =>{
     console.log(err)
@@ -43,9 +45,15 @@ if(process.env.NODE_ENV === 'development'){
  app.use('/api', blogRoute)
  app.use('/api', authRoute)
  app.use('/api', userRoute)
+ app.use('/api', categoryRoute)
+ app.use('/api', tagRoute)
 
 // port
 const port = process.env.PORT || 8000
 app.listen(port, () => {
   console.log(`Server is runninng on port ${port}`)
 })
+
+
+// BACKEND CONNECT
+// > MODEL > VALIDATOR > ROUTES > APPLY ROUTES IN SERVER > WRITE THE CONTROLLERS

@@ -37,7 +37,8 @@ const SigninComponent = () => {
         setValues({...values, error: data.error, loading: false})
       }else {
         authenticate(data, () => {
-          Router.push('/')
+          const redirRoute = isAuth() && isAuth().role === 1 ? '/admin' : '/user'
+          Router.push(redirRoute)
         })
         
       }

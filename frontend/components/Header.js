@@ -4,8 +4,13 @@ import Link from 'next/link'
 // import { APP_NAME } from '../config'
 import {signout, isAuth } from '../actions/auth'
 import Router, {useRouter} from 'next/router'
-import NavWithAuth from './nav/NavWithAuth'
+import NavLinks from './nav/NavLinks'
+import NProgress from 'nprogress'
 
+
+Router.onRouteChangeStart = url => NProgress.start()
+Router.onRouteChangeComplete = url => NProgress.done()
+Router.onRouteChangeError = url => NProgress.done()
 
 const Navbar = () => {
 
@@ -22,7 +27,7 @@ const Navbar = () => {
                 <a>{process.env.NEXT_PUBLIC_APP_NAME}</a>
               </Link>
             </h1>
-            <NavWithAuth />
+            <NavLinks display={'hidden sm:flex gap-16'} />
         </div>
 
         {/* Mobile Menu */}
@@ -35,26 +40,7 @@ const Navbar = () => {
         <div className={`sm:hidden fixed  w-[20rem] h-screen bg-white z-10 duration-300 ${showNav ? 'top-0 left-0' : 'top-0 left-[-100%]'}`}>
           <X onClick={() => setShowNav(!showNav)} size={25} className='absolute right-4 top-4 cursor-pointer' />
           <h2 className='text-left ml-12 text-2xl mt-2 p-4 font-extrabold '>Menu</h2>
-          <nav>
-            <ul className='flex flex-col p-4 text-gray-400 font-bold text-xl gap-6'>
-              <li className={`${isAuth() ? 'hidden' : ''} cursor-pointer`}>
-                <Link href='/signup'>
-                  <a className='hover:text-gray-600 active:text-gray-600 active:border-b-2 border-orange-500'>Signout</a>
-                </Link>
-              </li>
-              <li className='cursor-pointer'>
-                <Link href='/signin'>
-                  <a className='hover:text-gray-600 active:text-gray-600 active:border-b-2 border-orange-500'>Signin</a>
-                </Link>
-              </li>
-              <li className='cursor-pointer'>
-                <Link href='/signup'>
-                  <a className='hover:text-gray-600 active:text-gray-600 active:border-b-2 border-orange-500'>Signup</a>
-                </Link>
-              </li>
-              
-            </ul>
-          </nav>
+          <NavLinks display={'flex sm:hidden flex-col gap-4 px-6'}/>
         </div>
       </div>
   )
